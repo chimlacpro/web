@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Based on OS</title>
+    <script>
+        // Khai báo biến ID video và username
+        var videoID = "7410261046105050376"; // Thay thế bằng ID video TikTok của bạn
+        var username = "napna102"; // Thay thế bằng tên người dùng TikTok của bạn
+
+        function detectOSAndRedirect() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Kiểm tra nếu là Android
+            if (/android/i.test(userAgent)) {
+                // Mở TikTok trên app Android
+                window.location.href = "intent://v/" + videoID + "#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;end";
+            } 
+            // Kiểm tra nếu là iOS
+            else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // Mở TikTok trên app iOS
+                window.location.href = "tiktok://v/" + videoID; // Sử dụng ID video đã khai báo
+            }
+            // Không phải thiết bị di động, mở trong trình duyệt trên máy tính
+            else {
+                window.location.href = "https://www.tiktok.com/@"+ username +"/video/" + videoID; // Sử dụng tên người dùng và ID video đã khai báo
+            }
+        }
+
+        // Gọi hàm khi trang tải
+        window.onload = detectOSAndRedirect;
+    </script>
+</head>
+<body>
+    <h1>Đang chuyển hướng...</h1>
+    <p>Nếu không tự động chuyển hướng, vui lòng nhấp vào <a id="fallback-link" href="#">đây</a>.</p>
+    <script>
+        // Cập nhật liên kết dự phòng nếu không tự động chuyển hướng
+        document.getElementById("fallback-link").href = "https://www.tiktok.com/@" + username + "/video/" + videoID;
+    </script>
+</body>
+</html>
