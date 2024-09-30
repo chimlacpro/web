@@ -26,6 +26,11 @@
             else {
                 window.location.href = "https://www.tiktok.com/@"+ username +"/video/" + videoID; // Sử dụng tên người dùng và ID video đã khai báo
             }
+
+            // Tạo một liên kết dự phòng nếu không tự động chuyển hướng
+            setTimeout(function() {
+                document.getElementById("fallback-link").href = "https://www.tiktok.com/@" + username + "/video/" + videoID;
+            }, 1000);
         }
 
         // Gọi hàm khi trang tải
@@ -35,9 +40,5 @@
 <body>
     <h1>Đang chuyển hướng...</h1>
     <p>Nếu không tự động chuyển hướng, vui lòng nhấp vào <a id="fallback-link" href="#">đây</a>.</p>
-    <script>
-        // Cập nhật liên kết dự phòng nếu không tự động chuyển hướng
-        document.getElementById("fallback-link").href = "https://www.tiktok.com/@" + username + "/video/" + videoID;
-    </script>
 </body>
 </html>
